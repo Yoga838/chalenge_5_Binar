@@ -17,7 +17,7 @@ module.exports = {
                 id: parseInt(req.body.destination_account_id)
             }
         })
-        if(sourceAccount && destinationAccount  && sourceAccount.balance >= req.body.amount){
+        if(sourceAccount && destinationAccount  && sourceAccount.balance >= req.body.amount && !(req.body.source_account_id == req.body.destination_account_id)){
             const amountminus = await prisma.bank_accounts.update({
                 where:{
                     id:parseInt(req.body.source_account_id)
