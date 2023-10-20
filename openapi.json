@@ -1,0 +1,478 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "BINAR Be Chalenge Chapter 5 ",
+      "version": "1.0.11"
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    },
+    "servers": [
+      {
+        "url": "localhost:3000/dokumentasi"
+      }
+    ],
+    "tags": [
+      {
+        "name": "user",
+        "description": "User API"
+      },
+      {
+        "name":"Account",
+        "description":"Account Api"
+      },
+      {
+        "name":"Transactions",
+        "description":"Transactions Api"
+      }
+    ],
+    "paths": {
+        "/users/register": {
+          "post": {
+            "summary": "Register a new user",
+            "description": "Create a new user with the provided data.",
+            "tags":["user"],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "user",
+                "description": "User data for registration",
+                "required": true,
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "identity_number": {
+                      "type": "string"
+                    },
+                    "identity_type": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "User registered successfully",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/users": {
+          "get": {
+            "summary": "Get a list of all users",
+            "description": "Retrieve a list of all registered users.",
+            "tags":["user"],
+            "responses": {
+              "200": {
+                "description": "List of users",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dataUser": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/users/{id}": {
+          "get": {
+            "summary": "Get user by ID",
+            "description": "Retrieve a user by their ID.",
+            "tags":["user"],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "description": "User ID",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "User found",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dataUser": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "User not found",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/registerAccount": {
+            "post": {
+              "summary": "Register a bank account",
+              "tags":["Account"],
+              "parameters": [
+                {
+                  "name": "body",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful registration",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "bank_name": {
+                            "type": "string"
+                          },
+                          "bank_account_number": {
+                            "type": "string"
+                          },
+                          "balance": {
+                            "type": "string"
+                          },
+                          "user_id": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "User not found"
+                },
+                "500": {
+                  "description": "An error occurred while processing your request"
+                }
+              }
+            }
+          },
+          "/getAccounnt": {
+            "get": {
+              "summary": "Get all bank accounts",
+              "tags":["Account"],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "bank_name": {
+                              "type": "string"
+                            },
+                            "bank_account_number": {
+                              "type": "string"
+                            },
+                            "balance": {
+                              "type": "string"
+                            },
+                            "user_id": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "An error occurred while processing your request"
+                }
+              }
+            }
+          },
+          "/getDetailAccount/{id}": {
+            "get": {
+              "summary": "Get the details of a bank account by ID",
+              "tags":["Account"],
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "bank_name": {
+                            "type": "string"
+                          },
+                          "bank_account_number": {
+                            "type": "string"
+                          },
+                          "balance": {
+                            "type": "string"
+                          },
+                          "user_id": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Account not found"
+                },
+                "500": {
+                  "description": "An error occurred while processing your request"
+                }
+              }
+            }
+          },
+          "/makeTransactions": {
+            "post": {
+              "summary": "Make a bank transaction",
+              "tags":["Transactions"],
+              "parameters": [
+                {
+                  "name": "body",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "source_account_id": {
+                        "type": "integer"
+                      },
+                      "destination_account_id": {
+                        "type": "integer"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful transaction",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "source_account_id": {
+                            "type": "integer"
+                          },
+                          "destination_account_id": {
+                            "type": "integer"
+                          },
+                          "amount": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Invalid Source/Destination Account or Insufficient Balance"
+                },
+                "500": {
+                  "description": "An error occurred while making the transaction"
+                }
+              }
+            }
+          },
+          "/getAllTransactions": {
+            "get": {
+              "summary": "Get all bank transactions",
+              "tags":["Transactions"],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "source_account_id": {
+                              "type": "integer"
+                            },
+                            "destination_account_id": {
+                              "type": "integer"
+                            },
+                            "amount": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "An error occurred while fetching transactions"
+                }
+              }
+            }
+          },
+          "/getDetailTransaction/{id}": {
+            "get": {
+              "summary": "Get the details of a bank transaction by ID",
+              "tags":["Transactions"],
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful retrieval",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "source_account_id": {
+                            "type": "integer"
+                          },
+                          "destination_account_id": {
+                            "type": "integer"
+                          },
+                          "amount": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Transaction not found"
+                },
+                "500": {
+                  "description": "An error occurred while fetching transaction details"
+                }
+              }
+            }
+          }
+        }
+      }    
+    
